@@ -96,6 +96,7 @@ export default function LogoGrid() {
       <Slider {...settings}>
         {cards.map(card => (
           <Img
+            key={card.alt}
             maxHeight={'80px'}
             maxWidth={'200px'}
             src={card.src}

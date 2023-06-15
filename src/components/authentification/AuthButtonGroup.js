@@ -1,17 +1,18 @@
-import { Button, ButtonGroup, VisuallyHidden } from '@chakra-ui/react';
-import { GoogleIcon } from '../../assets/icons/ProviderIcons';
+import { Button, ButtonGroup, Text } from '@chakra-ui/react';
+import { GitHubIcon, GoogleIcon } from '../../assets/icons/AuthProviderIcons';
 
 const providers = [
   { name: 'Google', icon: <GoogleIcon boxSize="5" /> },
-  { name: 'Twitter', icon: <TwitterIcon boxSize="5" /> },
   { name: 'GitHub', icon: <GitHubIcon boxSize="5" /> },
 ];
 
-export const OAuthButtonGroup = () => (
-  <ButtonGroup variant="tertiary" spacing="4" width="full">
+export const AuthButtonGroup = () => (
+  <ButtonGroup spacing="4" width="full">
     {providers.map(({ name, icon }) => (
-      <Button key={name} width="full">
-        <VisuallyHidden>Sign in with {name}</VisuallyHidden>
+      <Button key={name} width="full" variant={'outline'}>
+        <Text mr={'15px'} fontSize={14}>
+          Sign up with {name}{' '}
+        </Text>{' '}
         {icon}
       </Button>
     ))}

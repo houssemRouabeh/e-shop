@@ -1,5 +1,5 @@
 import Navbar from '../navbar/Navbar';
-import { SignupForm } from './SignupForm';
+import SignupForm from './signupForm/SignupForm';
 
 const Signup = () => {
   return (

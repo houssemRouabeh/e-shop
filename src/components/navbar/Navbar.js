@@ -84,9 +84,9 @@ export default function Navbar() {
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
-            bg={'red.400'}
+            bg={'purple.400'}
             _hover={{
-              bg: 'red.300',
+              bg: 'purple.300',
             }}
           >
             <NavLink to={'/signup'}>Sign Up</NavLink>
@@ -160,11 +160,15 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       rounded={'md'}
       _hover={{ bg: useColorModeValue('red.50', 'gray.900') }}
     >
-      <Stack direction={'row'} align={'center'}>
+      <Stack
+        direction={'row'}
+        align={'center'}
+        _hover={{ bgColor: 'purple.50' }}
+      >
         <Box>
           <Text
             transition={'all .3s ease'}
-            _groupHover={{ color: 'red.400' }}
+            _groupHover={{ color: 'purple.400' }}
             fontWeight={500}
           >
             {label}
@@ -180,7 +184,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={'center'}
           flex={1}
         >
-          <Icon color={'red.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'purple.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
