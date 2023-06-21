@@ -14,11 +14,10 @@ const CustomPasswordInput = ({ label, ...props }) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const [field, meta] = useField(props);
-  console.log('field', field);
-  console.log(meta.error);
+
   return (
     <>
-      <FormControl isInvalid={meta.error}>
+      <FormControl isInvalid={meta.error && meta.touched}>
         <FormLabel htmlFor={props.name} fontWeight={'normal'} mt="5%">
           {label}
         </FormLabel>

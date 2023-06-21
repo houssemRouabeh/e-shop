@@ -12,12 +12,14 @@ import {
   Button,
   ButtonGroup,
   FormErrorMessage,
+  SimpleGrid,
 } from '@chakra-ui/react';
 
 import { country } from '../../../data/countryList';
 import { Form, Formik } from 'formik';
 import CustomSimpleInput from '../../inputForms/customInputs/CustomSimpleInput';
 import { userDetailsFormSchema } from '../../formSchemas/signupFormSchema';
+import CustomSelectInput from '../../inputForms/customInputs/CustomSelectInput';
 
 const UserDetailsForm = props => {
   const [pays, setPays] = useState('');
@@ -54,7 +56,6 @@ const UserDetailsForm = props => {
           errors,
           touched,
         }) => {
-          console.log(errors);
           return (
             <Form>
               <Heading
@@ -65,13 +66,12 @@ const UserDetailsForm = props => {
               >
                 User Details
               </Heading>
-              <Flex mt={'5%'}>
+              <SimpleGrid columns={2} gap={5} mt={'5%'}>
                 <CustomSimpleInput
                   label="First name"
                   id="firstName"
                   placeholder="First name"
                   name="firstName"
-                  custommargin={5}
                 />
                 <CustomSimpleInput
                   label={'Last name'}
@@ -79,15 +79,25 @@ const UserDetailsForm = props => {
                   placeholder="Last name"
                   name="lastName"
                 />
-              </Flex>
-              <Flex mt={'5%'}>
+              </SimpleGrid>
+              <SimpleGrid columns={2} gap={5}>
+                <CustomSelectInput
+                  label={'Gender'}
+                  name="gender"
+                  id="gender"
+                  placeholder="Select Gender"
+                  custommargin={5}
+                >
+                  <option value={'Male'}>Male</option>
+                  <option value={'Female'}>Female</option>
+                </CustomSelectInput>
                 <CustomSimpleInput
                   label="Date of Birth"
                   id="birthdate"
                   type="date"
                   name="birthdate"
                 />
-              </Flex>
+              </SimpleGrid>
               <Flex mt={'5%'}>
                 <FormControl isInvalid={touched.country && errors.country}>
                   <FormLabel htmlFor="country" fontWeight={'normal'}>

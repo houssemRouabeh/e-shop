@@ -30,6 +30,7 @@ export const userDetailsFormSchema = yup.object().shape({
     .string()
     .matches(/^[a-zA-Z ]*$/, 'Numbers are not allowed')
     .required('Last Name is required'),
+  gender: yup.string().oneOf(['Male', 'Female']).required('Gender is required'),
   birthdate: yup
     .date()
     .max(
@@ -44,4 +45,18 @@ export const adressDetailsFormSchema = yup.object().shape({
   adress: yup.string().required('Adress is required'),
   city: yup.string().required('City is required'),
   zipCode: yup.number().required('Postal Code is required'),
+});
+
+export const termsOfServiceFormScema = yup.object().shape({
+  validationCheckBox: yup
+    .boolean()
+    .oneOf([true], 'Please accept the terms of service'),
+});
+
+export const signinFormSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please enter a valid email')
+    .required('Email is required'),
+  password: yup.string().required('Password is required'),
 });

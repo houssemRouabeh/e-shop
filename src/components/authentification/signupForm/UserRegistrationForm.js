@@ -6,19 +6,32 @@ import {
   ButtonGroup,
   Button,
   Flex,
+  useToast,
+  textDecoration,
 } from '@chakra-ui/react';
 
-import { AuthButtonGroup } from '../AuthButtonGroup';
 import { Form, Formik } from 'formik';
 
 import CustomSimpleInput from '../../inputForms/customInputs/CustomSimpleInput';
 import { userRegistrationFormSchema } from '../../formSchemas/signupFormSchema';
 import CustomPasswordInput from '../../inputForms/customInputs/CustomPasswordInput';
+import { emailExistVerif } from '../../../services/usersSignupServices';
+import { Link } from 'react-router-dom';
 
 export default function UserRegistrationForm(props) {
-  const handleSubmit = values => {
-    props.next(values);
-    console.log(values);
+  const toast = useToast();
+  const handleSubmit = async values => {
+    const verifEmail = await emailExistVerif(values.email);
+
+    verifEmail
+      ? toast({
+          title: 'The mail you entred is already exist',
+          description: 'Go to Signin page to login',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+      : props.next(values);
   };
 
   return (
@@ -78,12 +91,17 @@ export default function UserRegistrationForm(props) {
             </ButtonGroup>
             <HStack mt={'5%'} mb={'5%'}>
               <Divider />
-              <Text fontSize="m" whiteSpace="nowrap" color="gray.500">
-                or continue with
+              <Text
+                fontSize="m"
+                whiteSpace="nowrap"
+                color="blue.600"
+                fontWeight={600}
+                _hover={{ textDecoration: 'underline' }}
+              >
+                <Link to={'/signin'}>Already a user? Login</Link>
               </Text>
               <Divider />
             </HStack>
-            <AuthButtonGroup />
           </Form>
         );
       }}

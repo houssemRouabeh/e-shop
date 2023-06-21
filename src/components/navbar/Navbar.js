@@ -79,7 +79,6 @@ export default function Navbar() {
             <NavLink to={'/signin'}>Sign In</NavLink>
           </Button>
           <Button
-            as={'a'}
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}

@@ -10,16 +10,18 @@ import {
   Checkbox,
   Button,
   ButtonGroup,
+  useToast,
 } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import CustomSimpleInput from '../../inputForms/customInputs/CustomSimpleInput';
 import { adressDetailsFormSchema } from '../../formSchemas/signupFormSchema';
 
 const AdressDetailsForm = props => {
+  const toast = useToast();
   const handleSubmit = values => {
     props.next(values);
-    console.log(values);
   };
+
   return (
     <>
       <Formik
@@ -28,7 +30,6 @@ const AdressDetailsForm = props => {
         validationSchema={adressDetailsFormSchema}
       >
         {({ handleSubmit, handleChange, handleBlur, values, errors }) => {
-          console.log(errors);
           return (
             <Form>
               <Heading w="100%" textAlign={'center'} fontWeight="normal">
@@ -61,20 +62,6 @@ const AdressDetailsForm = props => {
                   placeholder="Enter Postal Code"
                 />
               </Flex>
-              <Flex mt={'5%'}>
-                <Stack
-                  direction={{ base: 'column', sm: 'row' }}
-                  align={'start'}
-                  justify={'space-between'}
-                >
-                  <Checkbox id="agree-terms">
-                    <Text fontSize={'12px'}>
-                      By clicking Register, you agree on our terms and
-                      conditions
-                    </Text>
-                  </Checkbox>
-                </Stack>
-              </Flex>
               <ButtonGroup mt="10%" w="100%">
                 <Flex w="100%" justifyContent="space-around">
                   <Flex>
@@ -92,15 +79,11 @@ const AdressDetailsForm = props => {
                       colorScheme="purple"
                       variant="outline"
                       type="button"
-                      isDisabled
+                      onClick={handleSubmit}
                     >
                       Next
                     </Button>
                   </Flex>
-
-                  <Button w="7rem" colorScheme="red" variant="solid">
-                    Register
-                  </Button>
                 </Flex>
               </ButtonGroup>
             </Form>

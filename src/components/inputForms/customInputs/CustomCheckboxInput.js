@@ -1,14 +1,13 @@
 import {
+  Checkbox,
   FormControl,
   FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Input,
-  Select,
+  Text,
 } from '@chakra-ui/react';
 import { useField } from 'formik';
 
-const CustomSelectInput = ({ label, ...props }) => {
+const CustomCheckboxInput = ({ ...props }) => {
   const [field, meta] = useField(props);
 
   return (
@@ -16,12 +15,14 @@ const CustomSelectInput = ({ label, ...props }) => {
       <FormControl
         mt="2%"
         isInvalid={meta.error && meta.touched}
-        mr={props.customMargin}
+        mr={props.custommargin}
       >
-        <FormLabel htmlFor={props.name} fontWeight={'normal'}>
-          {label}
-        </FormLabel>
-        <Select {...props} {...field} shadow="sm" w="full" rounded="md" />
+        <Checkbox {...props} {...field} colorScheme={props.colorS}>
+          <Text fontSize={props.sizeFont} fontWeight={props.weight}>
+            {props.label}{' '}
+          </Text>
+        </Checkbox>
+
         {meta.touched && meta.error && (
           <FormErrorMessage>{meta.error}</FormErrorMessage>
         )}
@@ -30,4 +31,4 @@ const CustomSelectInput = ({ label, ...props }) => {
   );
 };
 
-export default CustomSelectInput;
+export default CustomCheckboxInput;
