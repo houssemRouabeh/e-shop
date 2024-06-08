@@ -10,6 +10,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import logoSimple from '../../assets/logo/logoSimple.svg';
+import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 
 const ListHeader = ({ children }) => {
   return (
@@ -45,6 +46,8 @@ export default function Footer() {
             <Center>
               <Text fontSize={'sm'}>© 2023 BookStore. All rights reserved</Text>
             </Center>
+            <ColorModeSwitcher justifySelf="flex-end" />
+            {/* <Text>{ColorModeSwitcher.name ? ' Night Mode' : 'Light Mode'}</Text> */}
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Product</ListHeader>

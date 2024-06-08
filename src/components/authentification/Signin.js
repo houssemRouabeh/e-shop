@@ -15,7 +15,7 @@ import {
 
 import { Form, Formik } from 'formik';
 
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import CustomPasswordInput from '../inputForms/customInputs/CustomPasswordInput';
 import CustomSimpleInput from '../inputForms/customInputs/CustomSimpleInput';
 import { googleSignup } from '../../services/usersSignupServices';
@@ -24,13 +24,22 @@ import { AuthButtonGroup } from './AuthButtonGroup';
 import CustomCheckboxInput from '../inputForms/customInputs/CustomCheckboxInput';
 import { signinFormSchema } from '../formSchemas/signupFormSchema';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import UserContext from '../../context/UserContext';
 
 const Signin = () => {
+  const toast = useToast();
+  const navigate = useNavigate();
   const handlegoogleSignup = async () => {
     await googleSignup(auth, googleProvider)
       .then(response => {
-        console.log('ok');
+        toast({
+          title: 'User Signed In.',
+          description: 'You are successfuly signed in .',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
       })
       .catch(error => {
         console.log('error');
@@ -41,7 +50,7 @@ const Signin = () => {
     password: '',
     validationCheckBox: false,
   };
-
+  const { isConnected, setIsConnected } = useContext(UserContext);
   const handleSubmit = async values => {
     console.log(values);
     const signin = await signInWithEmailAndPassword(
@@ -57,7 +66,25 @@ const Signin = () => {
             'idToken',
             JSON.stringify(result._tokenResponse.idToken)
           );
-          localStorage.setItem('loggedIn', true);
+          setIsConnected(true);
+          toast({
+            title: 'User Signed In.',
+            description: 'You are successfuly signed in .',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+          navigate(`/${result.user.uid}/home`, { replace: true });
+        } else {
+          toast({
+            title: 'User Signed In.',
+            description: 'You are successfuly signed in .',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+          setIsConnected(true);
+          navigate(`/${result.user.uid}/home`, { replace: true });
         }
       })
       .catch(error => {
